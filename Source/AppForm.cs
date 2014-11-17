@@ -13,7 +13,7 @@ namespace SuperHexabot
     public partial class AppForm : Form
     {
         /// <summary>
-        /// Out Super Hexagon playing Bot.
+        /// The Super Hexagon playing Bot.
         /// </summary>
         private SuperHexagonBot Bot;
 
@@ -25,6 +25,8 @@ namespace SuperHexabot
         private void AppForm_Load(object sender, EventArgs e)
         {
             Bot = new SuperHexagonBot();
+
+            MovementStyleDropdown.SelectedIndex = 0;
             Log.Output = LogOutput;
         }
 
@@ -47,16 +49,17 @@ namespace SuperHexabot
                 GameStatusLabel.BackColor = Color.OrangeRed;
             }
 
-            if( Bot.IsPlaying )
+            if (Bot.IsPlaying)
             {
-                PlayingStatusLabel.Text = "Playing!";
-                PlayingStatusLabel.BackColor = Color.LightGreen;
+                PlayingStatus.Text = "Playing game...";
+                PlayingStatus.BackColor = Color.LightGreen;
             }
             else
             {
-                PlayingStatusLabel.Text = "Not Playing";
-                PlayingStatusLabel.BackColor = Color.OrangeRed;
+                PlayingStatus.Text = "... Not playing.";
+                PlayingStatus.BackColor = Color.OrangeRed;
             }
+
 
             WorldAngleLabel.Text = "World Angle: " + Bot.API.WorldAngle;
             WallCountLabel.Text  = "Wall Count: "  + Bot.API.WallCount;
@@ -84,12 +87,16 @@ namespace SuperHexabot
                     WallTree.Nodes.Add(node);
                 }
             }
-   
         }
 
         private void ShouldPlayCheck_CheckedChanged(object sender, EventArgs e)
         {
             Bot.ShouldPlay = ShouldPlayCheck.Checked;
+        }
+
+        private void ClearLog_Click(object sender, EventArgs e)
+        {
+            Log.Clear();
         }
     }
 }

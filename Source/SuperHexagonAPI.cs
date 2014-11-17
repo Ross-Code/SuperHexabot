@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SuperHexabot
 {
     /// <summary>
-    /// Represents a way of interacting with the Super Hexagon game 
+    /// Represents an interface to manipulate the Super Hexagon game 
     /// while abstracting away having to directly fiddle with memory.
     /// </summary>
     public class SuperHexagonAPI
@@ -72,81 +72,6 @@ namespace SuperHexabot
         private bool GameIsOpen = false;
 
         public int BasePointer { get; set; }
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int PlayerSide
-        {
-            set
-            {
-                // Don't allow setting of PlayerSide when SideCount is 0.
-                if( SideCount == 0 )
-                    return;
-
-                int sideCount = SideCount;
-
-                int angle = 360 / sideCount * (value % sideCount) + (180 / sideCount);
-
-                Memory.WriteBasedInt(BasePointer, Offsets.PlayerAngle, angle);
-                Memory.WriteBasedInt(BasePointer, Offsets.PlayerAngle2, angle);
-            }
-        }
-        
-        /// <summary>
-        /// Get the current angle (spin/rotation) of the overall game world.
-        /// </summary>
-        public int WorldAngle
-        {
-            get 
-            {
-                if( !Memory.IsOpen )
-                    return 0;
-
-                return Memory.ReadBasedInt(BasePointer, Offsets.WorldAngle);
-            }
-        }
-
-        /// <summary>
-        /// Gets the current number of walls active.
-        /// </summary>
-        public int WallCount
-        {
-            get
-            {
-                if( !Memory.IsOpen )
-                    return 0;
-
-                return Memory.ReadBasedInt(BasePointer, Offsets.WallCount);
-            }
-        }
-
-        /// <summary>
-        /// Gets the current number of sides active.
-        /// </summary>
-        public int SideCount
-        {
-            get
-            {
-                if( !Memory.IsOpen )
-                    return 0;
-
-                return Memory.ReadBasedInt(BasePointer, Offsets.SideCount);
-            }
-        }
-
-        public bool IsOpen
-        {
-            get { return GameIsOpen; }
-        }
-
-        public Process Process
-        {
-            get { return GameProcess; }
-        }
         #endregion
 
         #region Methods
@@ -224,5 +149,79 @@ namespace SuperHexabot
         }
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PlayerSide
+        {
+            set
+            {
+                // Don't allow setting of PlayerSide when SideCount is 0.
+                if (SideCount == 0)
+                    return;
+
+                int sideCount = SideCount;
+
+                int angle = 360 / sideCount * (value % sideCount) + (180 / sideCount);
+
+                Memory.WriteBasedInt(BasePointer, Offsets.PlayerAngle, angle);
+                Memory.WriteBasedInt(BasePointer, Offsets.PlayerAngle2, angle);
+            }
+        }
+
+        /// <summary>
+        /// Get the current angle (spin/rotation) of the overall game world.
+        /// </summary>
+        public int WorldAngle
+        {
+            get
+            {
+                if (!Memory.IsOpen)
+                    return 0;
+
+                return Memory.ReadBasedInt(BasePointer, Offsets.WorldAngle);
+            }
+        }
+
+        /// <summary>
+        /// Gets the current number of walls active.
+        /// </summary>
+        public int WallCount
+        {
+            get
+            {
+                if (!Memory.IsOpen)
+                    return 0;
+
+                return Memory.ReadBasedInt(BasePointer, Offsets.WallCount);
+            }
+        }
+
+        /// <summary>
+        /// Gets the current number of sides active.
+        /// </summary>
+        public int SideCount
+        {
+            get
+            {
+                if (!Memory.IsOpen)
+                    return 0;
+
+                return Memory.ReadBasedInt(BasePointer, Offsets.SideCount);
+            }
+        }
+
+        public bool IsOpen
+        {
+            get { return GameIsOpen; }
+        }
+
+        public Process Process
+        {
+            get { return GameProcess; }
+        }
+        #endregion
     }
 }

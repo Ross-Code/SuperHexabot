@@ -1,10 +1,15 @@
 SuperHexabot
 ------------
 
-Bot for Super Hexagon written in C#. Check "Play game" to start the bot.
+Bot for Super Hexagon written in C#. 
 
-To Do
------
+## Usage
+
+* Start the game from Steam.
+* Check "Play Game" in bot.
+* Bot will pick up gameplay once it is entered.
+
+## To do
 
 * "Don't beat high scores" feature.
 * "Die after X period" feature.
