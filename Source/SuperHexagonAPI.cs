@@ -134,6 +134,7 @@ namespace SuperHexabot
         {
             bool foundGame = false;
 
+            // Loop through all processes looking for Super Hexagon (while ignoring the bot itself).
             foreach (Process process in Process.GetProcesses())
             {
                 if (process.MainWindowTitle.Contains(WindowTitle) && !process.MainWindowTitle.Contains("Bot"))

@@ -58,8 +58,6 @@ namespace SuperHexabot
         public MovementStyleFlag MovementStyle { get; set; }
         #endregion
 
-       
-
         public SuperHexagonBot()
         {
 
