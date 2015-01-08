@@ -116,13 +116,15 @@ namespace SuperHexabot
                 return;
             }
 
-            if (MovementStyle == MovementStyleFlag.Teleport)
+            if (MovementStyle == MovementStyleFlag.Locomotion )
             {
-
+                // TODO.
             }
         }
 
-
+        /// <summary>
+        /// Attempt to find the safest side for the player object.
+        /// </summary>
         private void FindSafestSide()
         {
             int sideCount = API.SideCount;
